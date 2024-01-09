@@ -36,3 +36,11 @@ SELECT DISTINCT author_id AS id FROM Views
 WHERE viewer_id = author_id AND viewer_id >= 1
 ORDER BY id ASC;
 -- ex13
+SELECT part FROM parts_assembly
+WHERE finish_date IS NULL; 
+-- ex14
+select * from lyft_drivers
+where yearly_salary <=30000 or yearly_salary >=70000;
+-- ex15 
+select * from uber_advertising
+where money_spent >100000 and year='2019';
