@@ -37,7 +37,10 @@ select tweet_id
 from Tweets
 where length(content)>15
 --ex7
---ex8 (hỏi thêm) 
+ select activity_date as day, count (distinct user_id) as active_users from Activity
+where activity_date between '2019-06-28' and '2019-07-27'
+group by activity_date;
+--ex8 
 select
 count() as number_employee 
 from employees
