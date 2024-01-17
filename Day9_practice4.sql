@@ -26,4 +26,11 @@ WHERE referee_id <> 2 OR referee_id IS NULL;
 SELECT name 
 FROM Customer
 WHERE COALESCE (referee_id,0) <> 2;
+--ex5
+select survived,
+sum (case when pclass = 1 then 1 else 0 end) as first_class,
+sum (case when pclass = 2 then 1 else 0 end) as second_class,
+sum (case when pclass = 3 then 1 else 0 end) as third_class
+from titanic
+group by survived; 
 
