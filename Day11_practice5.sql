@@ -18,6 +18,12 @@ INNER JOIN age_breakdown as t2 ON t1.user_id=t2.user_id
 WHERE t1.activity_type IN ('send','open')
 GROUP BY t2.age_bucket
 --ex4
+SELECT t1.customer_id as customer_id
+FROM customer_contracts as t1
+INNER JOIN products as t2
+ON t1.product_id=t2.product_id
+GROUP BY t1.customer_id
+HAVING count(distinct product_category) = 3
 --ex5
 select a.employee_id, a.name, 
 count(b.reports_to) as reports_count,
