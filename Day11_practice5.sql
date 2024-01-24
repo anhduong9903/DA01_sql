@@ -116,9 +116,14 @@ where first_name is null or last_name is null
 trên từng thành phố 
 Question:Thành phố nào đạt doanh thu cao nhất?
 Answer: Cape Coral : 221.55*/
-select 
-from city
-inner join payment 
+select a.city, sum (d.amount)
+from city as a 
+inner join address as b on a.city_id=b.city_id
+inner join customer as c on b.address_id=c.address_id 
+inner join payment as d on c.customer_id=d.customer_id
+group by a.city
+order  by sum (d.amount) desc limit 1
+
 /*Ex8: Tạo danh sách trả ra 2 cột dữ liệu: 
 -	cột 1: thông tin thành phố và đất nước 
 ( format: “city, country")
@@ -126,11 +131,12 @@ inner join payment
 Question: thành phố của đất nước nào đat doanh thu 
 cao nhất*/
 
-select 
-a.city || ',' || ' ' || b.country as city_country,
-
-from city as a
-inner join country as b on a.country_id=b.country_id
-
-
-
+select
+b.city || ',' || ' ' || a.country as city_country, sum (amount)
+from country as a
+inner join city as b on a.country_id=b.country_id 
+inner join address as c on b.city_id= c.city_id
+inner join customer as d on d.address_id=c.address_id 
+inner join payment as e on e.customer_id=d.customer_id
+group by b.city || ',' || ' ' || a.country
+order by sum (amount) desc limit 1
